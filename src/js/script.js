@@ -65,8 +65,14 @@ class BooksList {
     this.data.forEach((book) => {
       const ratingBgc = this.determineRatingBgc(book.rating);
       const ratingWidth = book.rating * 10;
-
-      const generatedHTML = Handlebars.compile(template)({ book, ratingBgc, ratingWidth });
+    
+      //const generatedHTML = Handlebars.compile(template)({
+      //book: book,
+      //ratingBgc: ratingBgc,
+      //ratingWidth: ratingWidth
+      //});
+      
+      const generatedHTML = Handlebars.compile(template)(Object.assign({}, book, { ratingBgc, ratingWidth }));
       const bookElement = utils.createDOMFromHTML(generatedHTML);
       this.bookList.appendChild(bookElement);
     });
@@ -110,4 +116,4 @@ class BooksList {
 }
 
 const app = new BooksList();
-app.bookList();
+app.bookList;
